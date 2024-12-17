@@ -60,9 +60,9 @@ To get started with Near Me, follow these steps:
 
 ## Screenshots
 
-![Intro Screen](screenshots/intro_screen.png)
-![Sign In Screen](screenshots/sign_in_screen.png)
-![Sign Up Screen](screenshots/sign_up_screen.png)
+![Intro Screen](UI/intro_screen.png)
+![Sign In Screen](UI/sign_in_screen.png)
+![Sign Up Screen](UI/sign_up_screen.png)
 
 ## Contributing
 
