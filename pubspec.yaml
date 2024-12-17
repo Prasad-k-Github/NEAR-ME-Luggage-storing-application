@@ -1,0 +1,39 @@
+name: near_me
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core Dependencies
+  cupertino_icons: ^1.0.8             # iOS-style icons
+  google_fonts: ^6.1.0                # Custom Google Fonts (Latest)
+  geolocator: ^13.0.2                 # Location services
+  google_maps_flutter: ^2.5.0         # Google Maps integration
+  firebase_core: ^3.8.1              # Firebase initialization
+  cloud_firestore: ^5.5.1            # Firestore for backend data storage
+  flutter_svg: ^2.0.10                # SVG image support
+  provider: ^6.1.0                    # State management
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0               # Linting rules for better code
+
+flutter:
+  uses-material-design: true
+
+  # Assets
+  assets:
+    - assets/images/intro_image_01.png
+    - assets/images/intro_image_02.png
+    - assets/images/intro_image_03.png
+    - assets/images/apple_logo.png
+    - assets/images/facebook_logo.png
+    - assets/images/google_logo.png
