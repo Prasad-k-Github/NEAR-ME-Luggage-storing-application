@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/widgets.dart';
 
 class DropBagsUI extends StatefulWidget {
   const DropBagsUI({super.key});
@@ -13,6 +14,12 @@ class _DropBagsUIState extends State<DropBagsUI> {
   int smallBagCount = 0;
   int regularBagCount = 0;
   int oddSizedBagCount = 0;
+
+  // State variables for date and time
+  DateTime? _startDate;
+  TimeOfDay? _startTime;
+  DateTime? _endDate;
+  TimeOfDay? _endTime;
 
   void _incrementBagCount(String bagType) {
     setState(() {
@@ -30,6 +37,40 @@ class _DropBagsUIState extends State<DropBagsUI> {
     });
   }
 
+  Future<void> _selectDate(BuildContext context, bool isStartDate) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != (isStartDate ? _startDate : _endDate)) {
+      setState(() {
+        if (isStartDate) {
+          _startDate = picked;
+        } else {
+          _endDate = picked;
+        }
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context, bool isStartTime) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null && picked != (isStartTime ? _startTime : _endTime)) {
+      setState(() {
+        if (isStartTime) {
+          _startTime = picked;
+        } else {
+          _endTime = picked;
+        }
+      });
+    }
+  }
+
   Widget _buildBagRow(String imagePath, String title, String subtitle,
       int bagCount, Function() onIncrement, Function() onDecrement) {
     return Row(
@@ -42,8 +83,8 @@ class _DropBagsUIState extends State<DropBagsUI> {
             Text(title,
                 style: GoogleFonts.mulish(
                     fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green)),
+                    fontWeight: FontWeight.w800,
+                    color: const Color(0xFF4C5372))),
             Text(subtitle, style: const TextStyle(color: Colors.grey)),
           ],
         ),
@@ -51,7 +92,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
         IconButton(
           icon: const Icon(Icons.add_circle_outline),
           onPressed: onIncrement,
-          color: Colors.green,
+          color: const Color(0xFF4C5372),
         ),
         Text(
           "$bagCount",
@@ -60,7 +101,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
         IconButton(
           icon: const Icon(Icons.remove_circle_outline),
           onPressed: onDecrement,
-          color: Colors.red,
+          color: const Color(0xFF4C5372),
         ),
       ],
     );
@@ -78,28 +119,72 @@ class _DropBagsUIState extends State<DropBagsUI> {
             child: Text(
               "DROP YOUR BAGS",
               style: GoogleFonts.mulish(
-                fontSize: 28,
+                fontSize: 30,
                 fontWeight: FontWeight.w900,
                 color: const Color(0xFF4C5372),
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
 
           // Date & Time Fields
-          _buildInputField("Start date", Icons.calendar_today),
-          _buildInputField("Start time", Icons.access_time),
-          _buildInputField("End date", Icons.calendar_today),
-          _buildInputField("End Time", Icons.access_time),
-
-          const SizedBox(height: 20),
-
-          Text(
-            "Choose the number and type of bags",
-            style: GoogleFonts.mulish(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey),
+          buildInputField(
+            "Start date",
+            false,
+            false,
+            () {},
+            onTap: () => _selectDate(context, true),
+            suffixIcon: const Icon(Icons.calendar_today, color: Colors.grey),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
+          buildInputField(
+            "Start time",
+            false,
+            false,
+            () {},
+            onTap: () => _selectTime(context, true),
+            suffixIcon: const Icon(Icons.access_time, color: Colors.grey),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          ),
+          const SizedBox(height: 12),
+          buildInputField(
+            "End date",
+            false,
+            false,
+            () {},
+            onTap: () => _selectDate(context, false),
+            suffixIcon: const Icon(Icons.calendar_today, color: Colors.grey),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          ),
+          const SizedBox(height: 12),
+          buildInputField(
+            "End time",
+            false,
+            false,
+            () {},
+            onTap: () => _selectTime(context, false),
+            suffixIcon: const Icon(Icons.access_time, color: Colors.grey),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          ),
+
+          const SizedBox(height: 30),
+
+          Center(
+            child: Text(
+              "Choose the number and type of bags",
+              style: GoogleFonts.mulish(
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+                color: const Color(0xFF4C5372),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
 
           // Bag Rows
           _buildBagRow("assets/images/small_bag.png", "Small Bag",
@@ -117,7 +202,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
           }),
           const SizedBox(height: 10),
           _buildBagRow("assets/images/odd_sized_bag.png", "Odd-sized",
-              "Surfboards, bikes, golf bags", oddSizedBagCount, () {
+              "Surfboards, golf bags", oddSizedBagCount, () {
             _incrementBagCount("odd");
           }, () {
             _decrementBagCount("odd");
@@ -126,56 +211,33 @@ class _DropBagsUIState extends State<DropBagsUI> {
 
           // Search Button
           Center(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF5A3C62),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            child: SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF5A3C62),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
-              ),
-              onPressed: () {
-                // Add search logic
-              },
-              child: const Text(
-                "Search",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                onPressed: () {
+                  // Add search logic
+                },
+                child: const Text(
+                  "Search",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildInputField(String label, IconData icon) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: ListTile(
-        title: Text(
-          label,
-          style: const TextStyle(color: Colors.grey),
-        ),
-        trailing: Icon(icon, color: Colors.grey),
-        onTap: () {
-          // Add functionality to pick date or time
-        },
       ),
     );
   }

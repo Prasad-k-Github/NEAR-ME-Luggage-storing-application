@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 /// Builds a custom input field with optional password visibility toggle.
 Widget buildInputField(String hint, bool isPassword, bool obscureText,
-    VoidCallback togglePasswordVisibility) {
+    VoidCallback togglePasswordVisibility,
+    {VoidCallback? onTap, Widget? suffixIcon, EdgeInsets? contentPadding}) {
   return Container(
     decoration: BoxDecoration(
       color: const Color(0xFFFFFFFF),
@@ -17,6 +18,8 @@ Widget buildInputField(String hint, bool isPassword, bool obscureText,
     ),
     child: TextField(
       obscureText: isPassword ? obscureText : false,
+      readOnly: onTap != null,
+      onTap: onTap,
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xFFFFFFFF),
@@ -30,6 +33,8 @@ Widget buildInputField(String hint, bool isPassword, bool obscureText,
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
+        contentPadding: contentPadding ??
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         suffixIcon: isPassword
             ? IconButton(
                 icon: Icon(
@@ -38,7 +43,7 @@ Widget buildInputField(String hint, bool isPassword, bool obscureText,
                 ),
                 onPressed: togglePasswordVisibility,
               )
-            : null,
+            : suffixIcon,
       ),
     ),
   );
