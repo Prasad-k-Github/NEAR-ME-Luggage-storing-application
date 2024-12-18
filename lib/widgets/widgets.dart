@@ -74,12 +74,11 @@ Widget buildSocialButton(String assetPath) {
 Widget buildInfoCard(String title, String imagePath,
     {double imageHeight = 50, double imageWidth = double.infinity}) {
   return Container(
-    width:
-        220, // Adjusted width for larger cards// Adjusted height for larger cards
+    width: 220,
     margin: const EdgeInsets.only(right: 12),
     padding: const EdgeInsets.all(16), // Increased padding
     decoration: BoxDecoration(
-      color: const Color(0xFFE2D4E0),
+      color: const Color(0xFFFFFFFF),
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(

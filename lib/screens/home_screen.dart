@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../widgets/widgets.dart'; // Import the widgets.dart file
+import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 180,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE2D4E0),
+                    color: const Color(0xFFFFFFFF),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
@@ -69,14 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
-                      'assets/images/large_image.png', // Replace with your image
-                      height: 80, // Adjusted height for the image
-                      width: 80, // Adjusted width for the image
+                      'assets/images/large_image.png',
+                      height: 80,
+                      width: 80,
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 35),
+                const SizedBox(height: 40),
 
                 // Horizontal Cards Section
                 Padding(
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 160,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE2D4E0),
+                    color: const Color(0xFFFFFFFF),
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontFamily: 'Arial',
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF3A6A68),
+                          color: Color(0xFF4C5372),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -169,7 +169,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 20),
               ],
             ),
