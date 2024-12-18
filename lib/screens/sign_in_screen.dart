@@ -36,6 +36,10 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
+  void _navigateToHome() {
+    Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,9 +143,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderRadius: BorderRadius.circular(9),
                     ),
                   ),
-                  onPressed: () {
-                    // Add sign-in logic
-                  },
+                  onPressed: _navigateToHome, // Navigate to HomeScreen
                   child: const Text(
                     "Sign In",
                     style: TextStyle(
@@ -311,9 +313,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderRadius: BorderRadius.circular(9),
                     ),
                   ),
-                  onPressed: () {
-                    // Add sign-up logic
-                  },
+                  onPressed: _navigateToHome, // Navigate to HomeScreen
                   child: const Text(
                     "Sign Up",
                     style: TextStyle(

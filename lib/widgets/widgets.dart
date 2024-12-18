@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Builds a custom input field with optional password visibility toggle.
 Widget buildInputField(String hint, bool isPassword, bool obscureText,
     VoidCallback togglePasswordVisibility) {
   return Container(
@@ -43,6 +44,7 @@ Widget buildInputField(String hint, bool isPassword, bool obscureText,
   );
 }
 
+/// Builds a social media button with the provided asset path.
 Widget buildSocialButton(String assetPath) {
   return Container(
     width: 90,
@@ -63,6 +65,143 @@ Widget buildSocialButton(String assetPath) {
         assetPath,
         width: 24,
         height: 24,
+      ),
+    ),
+  );
+}
+
+/// Builds an information card with a title and image.
+Widget buildInfoCard(String title, String imagePath,
+    {double imageHeight = 50, double imageWidth = double.infinity}) {
+  return Container(
+    width:
+        220, // Adjusted width for larger cards// Adjusted height for larger cards
+    margin: const EdgeInsets.only(right: 12),
+    padding: const EdgeInsets.all(16), // Increased padding
+    decoration: BoxDecoration(
+      color: const Color(0xFFE2D4E0),
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 4,
+          offset: const Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              imagePath,
+              height: imageHeight, // Use the provided image height
+              width: imageWidth, // Use the provided image width
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Center(
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontFamily: 'Arial',
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF4C5372),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Builds a navigation bar item with an icon and active state.
+Widget buildNavBarItem({required bool isActive, required IconData icon}) {
+  return Container(
+    padding: const EdgeInsets.all(10),
+    decoration: isActive
+        ? const BoxDecoration(
+            color: Color(0xFFE2D4E0),
+            shape: BoxShape.circle,
+          )
+        : null,
+    child: Icon(
+      icon,
+      size: 30,
+      color: isActive ? const Color(0xFF4C5372) : Colors.white,
+    ),
+  );
+}
+
+/// Builds a custom bottom navigation bar with the provided selected index and onTap callback.
+Widget buildBottomNavigationBar(int selectedIndex, Function(int) onTap) {
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+    height: 50,
+    decoration: BoxDecoration(
+      color: const Color(0xFF4C5372), // Navigation bar background color
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.2),
+          blurRadius: 6,
+          offset: const Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _buildNavBarItem(
+          icon: Icons.home,
+          isActive: selectedIndex == 0,
+          onTap: () => onTap(0),
+        ),
+        _buildNavBarItem(
+          icon: Icons.description,
+          isActive: selectedIndex == 1,
+          onTap: () => onTap(1),
+        ),
+        _buildNavBarItem(
+          icon: Icons.location_on,
+          isActive: selectedIndex == 2,
+          onTap: () => onTap(2),
+        ),
+        _buildNavBarItem(
+          icon: Icons.person,
+          isActive: selectedIndex == 3,
+          onTap: () => onTap(3),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Builds a navigation bar item with an icon, active state, and onTap callback.
+Widget _buildNavBarItem({
+  required IconData icon,
+  required bool isActive,
+  required VoidCallback onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: isActive
+          ? const BoxDecoration(
+              color: Color(0xFFE2D4E0), // Active item background color
+              shape: BoxShape.circle,
+            )
+          : null, // No decoration for inactive items
+      child: Icon(
+        icon,
+        size: 30,
+        color: isActive ? const Color(0xFF4C5372) : Colors.white,
       ),
     ),
   );
