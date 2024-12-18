@@ -73,13 +73,15 @@ class _DropBagsUIState extends State<DropBagsUI> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10),
-          Text(
-            "When do you want to drop your bags?",
-            style: GoogleFonts.mulish(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF5A3C62),
+          const SizedBox(height: 30),
+          Center(
+            child: Text(
+              "DROP YOUR BAGS",
+              style: GoogleFonts.mulish(
+                fontSize: 28,
+                fontWeight: FontWeight.w900,
+                color: const Color(0xFF4C5372),
+              ),
             ),
           ),
           const SizedBox(height: 20),

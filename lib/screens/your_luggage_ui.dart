@@ -11,12 +11,12 @@ class YourLuggageUI extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
           Text(
-            "Your luggage",
+            "YOUR LUGGAGE",
             style: GoogleFonts.mulish(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
+              fontSize: 28,
+              fontWeight: FontWeight.w900,
               color: const Color(0xFF4C5372),
             ),
           ),

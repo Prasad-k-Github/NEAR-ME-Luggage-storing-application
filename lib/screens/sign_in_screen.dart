@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   style: GoogleFonts.mulish(
                     textStyle: const TextStyle(
                       fontSize: 40,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       letterSpacing: 1.5,
                       color: Color(0xFF4C5372),
                     ),
@@ -258,7 +258,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   style: GoogleFonts.mulish(
                     textStyle: const TextStyle(
                       fontSize: 40,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       letterSpacing: 1.5,
                       color: Color(0xFF4C5372),
                     ),

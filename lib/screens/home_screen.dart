@@ -90,7 +90,7 @@ class HomeUI extends StatelessWidget {
             "Welcome To",
             style: GoogleFonts.mulish(
               fontSize: 35,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w900,
               color: const Color(0xFF4C5372),
             ),
           ),

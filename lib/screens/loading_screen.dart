@@ -33,8 +33,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
             Text(
               "NEAR ME",
               style: GoogleFonts.mulish(
-                fontSize: 64.0,
-                fontWeight: FontWeight.bold,
+                fontSize: 64,
+                fontWeight: FontWeight.w900,
                 color: const Color(0xFF4C5372), // Text Color
                 letterSpacing: 1.5,
               ),
