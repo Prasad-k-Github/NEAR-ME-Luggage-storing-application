@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/widgets.dart';
 import 'your_luggage_ui.dart';
 import 'drop_bags_ui.dart';
+import 'profile_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,13 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _screens = [
       // Home Screen UI
-      HomeUI(navigateToDropBags: _navigateToDropBags),
+      HomeUI(navigateToYourLuggage: _navigateToYourLuggage),
       // Your Luggage UI
       YourLuggageUI(navigateToDropBags: _navigateToDropBags),
       // Drop Bags Screen UI
       DropBagsUI(),
-      // Placeholder for Profile Screen
-      Center(child: Text("Profile Screen", style: TextStyle(fontSize: 20))),
+      // Profile Screen UI
+      ProfileUI(),
     ];
   }
 
@@ -42,11 +43,33 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _navigateToYourLuggage() {
+    setState(() {
+      _selectedIndex = 1;
+      _pageController.animateToPage(
+        1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   void _navigateToDropBags() {
     setState(() {
       _selectedIndex = 2;
       _pageController.animateToPage(
         2,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  void _navigateToProfile() {
+    setState(() {
+      _selectedIndex = 3;
+      _pageController.animateToPage(
+        3,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -76,9 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // Home Screen UI
 class HomeUI extends StatelessWidget {
-  final VoidCallback navigateToDropBags;
+  final VoidCallback navigateToYourLuggage;
 
-  const HomeUI({super.key, required this.navigateToDropBags});
+  const HomeUI({super.key, required this.navigateToYourLuggage});
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +236,7 @@ class HomeUI extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: navigateToDropBags,
+                    onPressed: navigateToYourLuggage,
                     child: const Text(
                       "Find closest locations",
                       style: TextStyle(

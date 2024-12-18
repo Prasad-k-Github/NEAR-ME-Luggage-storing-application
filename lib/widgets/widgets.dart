@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Builds a custom input field with optional password visibility toggle.
 Widget buildInputField(String hint, bool isPassword, bool obscureText,
@@ -206,6 +207,37 @@ Widget _buildNavBarItem({
         icon,
         size: 30,
         color: isActive ? const Color(0xFF4C5372) : Colors.white,
+      ),
+    ),
+  );
+}
+
+/// Reusable button widget
+Widget buildProfileButton({
+  required String text,
+  required Color color,
+  required VoidCallback onPressed,
+}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12),
+      ),
+      onPressed: onPressed,
+      child: Center(
+        child: Text(
+          text,
+          style: GoogleFonts.mulish(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
     ),
   );
