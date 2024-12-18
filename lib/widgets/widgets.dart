@@ -5,7 +5,7 @@ Widget buildInputField(String hint, bool isPassword, bool obscureText,
     VoidCallback togglePasswordVisibility) {
   return Container(
     decoration: BoxDecoration(
-      color: const Color(0xFFE2D4E0),
+      color: const Color(0xFFFFFFFF),
       borderRadius: BorderRadius.circular(8),
       boxShadow: [
         BoxShadow(
@@ -19,7 +19,7 @@ Widget buildInputField(String hint, bool isPassword, bool obscureText,
       obscureText: isPassword ? obscureText : false,
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color(0xFFE2D4E0),
+        fillColor: const Color(0xFFFFFFFF),
         hintText: hint,
         hintStyle: const TextStyle(
           color: Color(0xFF7C7E9D),
@@ -50,7 +50,7 @@ Widget buildSocialButton(String assetPath) {
     width: 90,
     height: 45,
     decoration: BoxDecoration(
-      color: const Color(0xFFE2D4E0),
+      color: const Color(0xFFFFFFFF),
       borderRadius: BorderRadius.circular(8),
       boxShadow: [
         BoxShadow(
@@ -96,8 +96,8 @@ Widget buildInfoCard(String title, String imagePath,
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
               imagePath,
-              height: imageHeight, // Use the provided image height
-              width: imageWidth, // Use the provided image width
+              height: imageHeight,
+              width: imageWidth,
               fit: BoxFit.cover,
             ),
           ),
@@ -141,10 +141,10 @@ Widget buildNavBarItem({required bool isActive, required IconData icon}) {
 Widget buildBottomNavigationBar(int selectedIndex, Function(int) onTap) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-    height: 50,
+    height: 65,
     decoration: BoxDecoration(
       color: const Color(0xFF4C5372), // Navigation bar background color
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(30),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.2),
@@ -190,10 +190,10 @@ Widget _buildNavBarItem({
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(7.0),
       decoration: isActive
           ? const BoxDecoration(
-              color: Color(0xFFE2D4E0), // Active item background color
+              color: Color(0xFFFFFFFF), // Active item background color
               shape: BoxShape.circle,
             )
           : null, // No decoration for inactive items

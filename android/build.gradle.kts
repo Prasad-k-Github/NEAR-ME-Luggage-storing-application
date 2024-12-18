@@ -14,6 +14,9 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
+    if (project.name == "flutter_plugin_android_lifecycle") {
+        project.buildDir = file("${rootProject.projectDir}/build/flutter_plugin_android_lifecycle")
+    }
 }
 
 tasks.register<Delete>("clean") {

@@ -41,3 +41,6 @@ flutter:
     - assets/images/small_image_01.png
     - assets/images/small_image_02.png
     - assets/images/small_image_03.png
+    - assets/images/small_bag.png
+    - assets/images/regular_bag.png
+    - assets/images/odd_sized_bag.png
