@@ -1,0 +1,2 @@
+F:/Absol x/near_me/android/app/.cxx/RelWithDebInfo/3y6m3g44/x86_64/CMakeFiles/edit_cache.dir
+F:/Absol x/near_me/android/app/.cxx/RelWithDebInfo/3y6m3g44/x86_64/CMakeFiles/rebuild_cache.dir
