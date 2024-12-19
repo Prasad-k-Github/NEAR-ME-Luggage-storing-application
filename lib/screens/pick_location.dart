@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geocoding/geocoding.dart';
+import '../routes.dart';
 
 class PickLocation extends StatefulWidget {
   const PickLocation({super.key});
@@ -12,55 +13,104 @@ class PickLocation extends StatefulWidget {
 
 class _PickLocationState extends State<PickLocation> {
   late GoogleMapController _mapController;
-  static const LatLng _initialPosition = LatLng(0, 0); // Global view
+  static const LatLng _initialPosition = LatLng(0, 0);
   LatLng _currentPosition = _initialPosition;
   final TextEditingController _searchController = TextEditingController();
+  String _locationName = "Retail Store";
+  String _openingStatus = "Open Now";
+  String _rating = "4.5";
+  String _price = "From \$4.99/ 24h";
+  String _closingTime = "Closes at 10:30 PM";
   String _placeDetails = "";
+  String _imageUrl = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE2D4E0), // Background color
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Google Map
-            GoogleMap(
-              initialCameraPosition: const CameraPosition(
-                target: _initialPosition,
-                zoom: 2.0, // Zoom level for a global view
-              ),
-              onMapCreated: (controller) {
-                _mapController = controller;
-              },
-              onTap: (position) {
-                setState(() {
-                  _currentPosition = position;
-                });
-                _mapController.animateCamera(
-                  CameraUpdate.newLatLng(position),
-                );
-                _getPlaceDetails(position);
-              },
-              markers: {
-                Marker(
-                  markerId: const MarkerId('selected-location'),
-                  position: _currentPosition,
-                ),
-              },
-              scrollGesturesEnabled: true,
-              zoomGesturesEnabled: true,
-              rotateGesturesEnabled: true,
-              tiltGesturesEnabled: true,
+      body: Stack(
+        children: [
+          // Google Map
+          GoogleMap(
+            initialCameraPosition: const CameraPosition(
+              target: _initialPosition,
+              zoom: 2.0,
             ),
+            onMapCreated: (controller) {
+              _mapController = controller;
+            },
+            onTap: (position) async {
+              setState(() {
+                _currentPosition = position;
+              });
+              _mapController.animateCamera(
+                CameraUpdate.newLatLng(position),
+              );
+              await _getPlaceDetails(position);
+            },
+            markers: {
+              Marker(
+                markerId: const MarkerId('selected-location'),
+                position: _currentPosition,
+              ),
+            },
+            scrollGesturesEnabled: true,
+            zoomGesturesEnabled: true,
+            rotateGesturesEnabled: true,
+            tiltGesturesEnabled: true,
+          ),
 
-            // Search Bar
+          // Search Bar
+          Positioned(
+            top: 10,
+            left: 15,
+            right: 15,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search location',
+                        hintStyle: GoogleFonts.mulish(
+                          color: const Color(0xFF7C7E9D),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: _searchLocation,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Details Selection UI
+          if (_placeDetails.isNotEmpty)
             Positioned(
-              top: 10,
+              bottom: 100,
               left: 15,
               right: 15,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                height: 220,
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
@@ -72,90 +122,113 @@ class _PickLocationState extends State<PickLocation> {
                     ),
                   ],
                 ),
-                child: Row(
+                child: Stack(
                   children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _searchController,
-                        decoration: InputDecoration(
-                          hintText: 'Search location',
-                          hintStyle: GoogleFonts.mulish(
-                            color: const Color(0xFF7C7E9D),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                    Row(
+                      children: [
+                        // Image Placeholder
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.grey.shade300,
                           ),
-                          border: InputBorder.none,
+                          child: _imageUrl.isEmpty
+                              ? const Icon(Icons.image,
+                                  size: 40, color: Colors.grey)
+                              : Image.network(_imageUrl, fit: BoxFit.cover),
+                        ),
+                        const SizedBox(width: 8),
+                        // Details Section
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                _locationName,
+                                style: GoogleFonts.mulish(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                  color: const Color(0xFF4C5372),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                _placeDetails,
+                                style: GoogleFonts.mulish(
+                                  fontSize: 16,
+                                  color: const Color(0xFF7C7E9D),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  const Icon(Icons.star,
+                                      size: 16, color: Colors.yellow),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    _rating,
+                                    style: GoogleFonts.mulish(
+                                      fontSize: 14,
+                                      color: const Color(0xFF4C5372),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    _openingStatus,
+                                    style: GoogleFonts.mulish(
+                                      fontSize: 14,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "$_price | $_closingTime",
+                                style: GoogleFonts.mulish(
+                                  fontSize: 14,
+                                  color: const Color(0xFF7C7E9D),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    // Select Location Button
+                    Positioned(
+                      bottom: 10,
+                      right: 0,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF8D5B8C),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            Routes.dropBagsScreen, // Navigate to Drop Bags UI
+                          );
+                        },
+                        child: const Text(
+                          "Select Location",
+                          style: TextStyle(fontSize: 14, color: Colors.white),
                         ),
                       ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: _searchLocation,
                     ),
                   ],
                 ),
               ),
             ),
-
-            // Zoom In Button
-            Positioned(
-              bottom: 80,
-              right: 15,
-              child: FloatingActionButton(
-                onPressed: () {
-                  _mapController.animateCamera(
-                    CameraUpdate.zoomIn(),
-                  );
-                },
-                child: const Icon(Icons.zoom_in),
-              ),
-            ),
-
-            // Zoom Out Button
-            Positioned(
-              bottom: 15,
-              right: 15,
-              child: FloatingActionButton(
-                onPressed: () {
-                  _mapController.animateCamera(
-                    CameraUpdate.zoomOut(),
-                  );
-                },
-                child: const Icon(Icons.zoom_out),
-              ),
-            ),
-
-            // Place Details
-            if (_placeDetails.isNotEmpty)
-              Positioned(
-                bottom: 80,
-                left: 15,
-                right: 15,
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 6,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    _placeDetails,
-                    style: GoogleFonts.mulish(
-                      color: const Color(0xFF4C5372),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -174,10 +247,9 @@ class _PickLocationState extends State<PickLocation> {
           _mapController.animateCamera(
             CameraUpdate.newLatLng(newPosition),
           );
-          _getPlaceDetails(newPosition);
+          await _getPlaceDetails(newPosition);
         }
       } catch (e) {
-        // Handle error
         print('Error occurred while searching location: $e');
       }
     }
@@ -185,22 +257,16 @@ class _PickLocationState extends State<PickLocation> {
 
   Future<void> _getPlaceDetails(LatLng position) async {
     try {
-      List<Placemark> placemarks = await placemarkFromCoordinates(
-        position.latitude,
-        position.longitude,
-      );
-      if (placemarks.isNotEmpty) {
-        Placemark place = placemarks.first;
-        setState(() {
-          _placeDetails = "${place.name}, ${place.locality}, ${place.country}";
-        });
-      } else {
-        setState(() {
-          _placeDetails = "No details available";
-        });
-      }
+      setState(() {
+        _locationName = "Dynamic Location";
+        _imageUrl = "https://via.placeholder.com/80";
+        _openingStatus = "Open Now";
+        _rating = "4.8";
+        _price = "From \$5.99/ 24h";
+        _closingTime = "Closes at 9:00 PM";
+        _placeDetails = "456 Example Ave, City, Country";
+      });
     } catch (e) {
-      // Handle error
       print('Error occurred while getting place details: $e');
     }
   }

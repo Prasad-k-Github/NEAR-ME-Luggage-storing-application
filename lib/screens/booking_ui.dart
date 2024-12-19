@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../routes.dart';
 
 class BookingUI extends StatelessWidget {
   const BookingUI({super.key});
@@ -14,7 +15,7 @@ class BookingUI extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
 
               // Title Section
               Center(
@@ -59,7 +60,7 @@ class BookingUI extends StatelessWidget {
                                 "Park Place Storage Spot",
                                 style: GoogleFonts.mulish(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w900,
                                   color: const Color(0xFF4C5372),
                                 ),
                               ),
@@ -71,7 +72,7 @@ class BookingUI extends StatelessWidget {
                                     style: GoogleFonts.mulish(
                                       fontSize: 14,
                                       color: const Color(0xFF2ECC71),
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w800,
                                     ),
                                   ),
                                   const SizedBox(width: 8),
@@ -80,6 +81,7 @@ class BookingUI extends StatelessWidget {
                                     style: GoogleFonts.mulish(
                                       fontSize: 14,
                                       color: const Color(0xFF7C7E9D),
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ],
@@ -93,7 +95,7 @@ class BookingUI extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
 
               // Booking Details
               _buildBookingDetail(
@@ -108,19 +110,20 @@ class BookingUI extends StatelessWidget {
                 title: "Today, 10:00 AM  →  Dec 20, 05:00 PM",
                 onEditPressed: () {},
               ),
-
+              const SizedBox(height: 20),
+              Divider(color: const Color(0xFF7C7E9D)),
               const SizedBox(height: 20),
 
               // Promo Code Section
               Text(
                 "Price details",
                 style: GoogleFonts.mulish(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
                   color: const Color(0xFF4C5372),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFE2D4E0),
@@ -139,6 +142,7 @@ class BookingUI extends StatelessWidget {
                     hintStyle: GoogleFonts.mulish(
                       fontSize: 14,
                       color: const Color(0xFF4C5372),
+                      fontWeight: FontWeight.w800,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -150,6 +154,8 @@ class BookingUI extends StatelessWidget {
                 ),
               ),
 
+              const SizedBox(height: 30),
+              Divider(color: const Color(0xFF7C7E9D)),
               const SizedBox(height: 20),
 
               // Price Details
@@ -161,13 +167,15 @@ class BookingUI extends StatelessWidget {
                     style: GoogleFonts.mulish(
                       fontSize: 14,
                       color: const Color(0xFF4C5372),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     "\$9.98",
                     style: GoogleFonts.mulish(
                       fontSize: 14,
-                      color: const Color(0xFF4C5372),
+                      color: const Color(0xFF5A3C62),
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ],
@@ -181,43 +189,43 @@ class BookingUI extends StatelessWidget {
                     style: GoogleFonts.mulish(
                       fontSize: 14,
                       color: const Color(0xFF4C5372),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     "\$5.20",
                     style: GoogleFonts.mulish(
                       fontSize: 14,
-                      color: const Color(0xFF4C5372),
+                      color: const Color(0xFF5A3C62),
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
-              Divider(color: const Color(0xFF7C7E9D)),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Total",
                     style: GoogleFonts.mulish(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
                       color: const Color(0xFF4C5372),
                     ),
                   ),
                   Text(
                     "\$15.18",
                     style: GoogleFonts.mulish(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF4C5372),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                      color: const Color(0xFF5A3C62),
                     ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
               // Continue to Payment Button
               SizedBox(
@@ -231,7 +239,7 @@ class BookingUI extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Navigate to payment
+                    Navigator.pushNamed(context, Routes.confirmPaymentScreen);
                   },
                   child: Text(
                     "Continue To Payment",

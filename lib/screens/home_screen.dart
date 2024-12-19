@@ -22,7 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _screens = [
       // Home Screen UI
-      HomeUI(navigateToYourLuggage: _navigateToYourLuggage),
+      HomeUI(
+          navigateToYourLuggage: _navigateToYourLuggage,
+          navigateToPickLocation: _navigateToPickLocation),
       // Your Luggage UI
       YourLuggageUI(navigateToDropBags: _navigateToDropBags),
       // Pick Location Screen UI
@@ -65,6 +67,17 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _navigateToPickLocation() {
+    setState(() {
+      _selectedIndex = 2;
+      _pageController.animateToPage(
+        2,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,8 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
 // Home Screen UI
 class HomeUI extends StatelessWidget {
   final VoidCallback navigateToYourLuggage;
+  final VoidCallback navigateToPickLocation;
 
-  const HomeUI({super.key, required this.navigateToYourLuggage});
+  const HomeUI(
+      {super.key,
+      required this.navigateToYourLuggage,
+      required this.navigateToPickLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +242,7 @@ class HomeUI extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: navigateToYourLuggage,
+                    onPressed: navigateToPickLocation,
                     child: const Text(
                       "Find closest locations",
                       style: TextStyle(

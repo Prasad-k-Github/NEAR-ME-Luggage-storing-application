@@ -7,6 +7,10 @@ import 'screens/profile_ui.dart';
 import 'screens/update_profile_ui.dart';
 import 'screens/update_profile_details_ui.dart';
 import 'screens/change_password_ui.dart';
+import 'screens/pick_location.dart';
+import 'screens/drop_bags_ui.dart';
+import 'screens/booking_ui.dart';
+import 'screens/confirm_payment_ui.dart'; // Import ConfirmPaymentUI
 
 class Routes {
   static const String loadingScreen = '/';
@@ -17,6 +21,10 @@ class Routes {
   static const String updateProfileScreen = '/update-profile';
   static const String updateProfileDetailsScreen = '/update-profile-details';
   static const String changePasswordScreen = '/change-password';
+  static const String pickLocationScreen = '/pick-location';
+  static const String dropBagsScreen = '/drop-bags';
+  static const String bookingScreen = '/booking';
+  static const String confirmPaymentScreen = '/confirm-payment';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -28,6 +36,10 @@ class Routes {
       updateProfileScreen: (context) => const UpdateProfileUI(),
       updateProfileDetailsScreen: (context) => const UpdateProfileDetailsUI(),
       changePasswordScreen: (context) => const ChangePasswordUI(),
+      pickLocationScreen: (context) => const PickLocation(),
+      dropBagsScreen: (context) => const DropBagsUI(),
+      bookingScreen: (context) => const BookingUI(),
+      confirmPaymentScreen: (context) => const ConfirmPaymentUI(),
     };
   }
 }
