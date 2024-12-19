@@ -32,16 +32,8 @@ class ProfileUI extends StatelessWidget {
               // User Avatar
               Center(
                 child: CircleAvatar(
-                  radius: 50,
-                  backgroundColor: const Color(0xFF5A3C62),
-                  child: Text(
-                    "U",
-                    style: GoogleFonts.mulish(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                  radius: 70, // Increased radius
+                  backgroundImage: AssetImage('assets/images/boy.png'),
                 ),
               ),
 
