@@ -10,7 +10,7 @@ import 'screens/change_password_ui.dart';
 import 'screens/pick_location.dart';
 import 'screens/drop_bags_ui.dart';
 import 'screens/booking_ui.dart';
-import 'screens/confirm_payment_ui.dart'; // Import ConfirmPaymentUI
+import 'screens/confirm_payment_ui.dart';
 
 class Routes {
   static const String loadingScreen = '/';
@@ -41,5 +41,42 @@ class Routes {
       bookingScreen: (context) => const BookingUI(),
       confirmPaymentScreen: (context) => const ConfirmPaymentUI(),
     };
+  }
+
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case pickLocationScreen:
+        return _createRoute(const PickLocation());
+      case dropBagsScreen:
+        return _createRoute(const DropBagsUI());
+      case bookingScreen:
+        return _createRoute(const BookingUI());
+      case confirmPaymentScreen:
+        return _createRoute(const ConfirmPaymentUI());
+      default:
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        );
+    }
+  }
+
+  static PageRouteBuilder _createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
   }
 }

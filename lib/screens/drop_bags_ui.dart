@@ -22,6 +22,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
   DateTime? _endDate;
   TimeOfDay? _endTime;
 
+  // Increment the count of bags based on the bag type
   void _incrementBagCount(String bagType) {
     setState(() {
       if (bagType == "small") smallBagCount++;
@@ -30,6 +31,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
     });
   }
 
+  // Decrement the count of bags based on the bag type
   void _decrementBagCount(String bagType) {
     setState(() {
       if (bagType == "small" && smallBagCount > 0) smallBagCount--;
@@ -38,6 +40,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
     });
   }
 
+  // Select a date using a date picker
   Future<void> _selectDate(BuildContext context, bool isStartDate) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -56,6 +59,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
     }
   }
 
+  // Select a time using a time picker
   Future<void> _selectTime(BuildContext context, bool isStartTime) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -72,6 +76,19 @@ class _DropBagsUIState extends State<DropBagsUI> {
     }
   }
 
+  // Format the selected date
+  String _formatDate(DateTime? date) {
+    if (date == null) return "Select date";
+    return "${date.day}/${date.month}/${date.year}";
+  }
+
+  // Format the selected time
+  String _formatTime(TimeOfDay? time) {
+    if (time == null) return "Select time";
+    return "${time.hour}:${time.minute.toString().padLeft(2, '0')}";
+  }
+
+  // Build a row for displaying bag details and count controls
   Widget _buildBagRow(String imagePath, String title, String subtitle,
       int bagCount, Function() onIncrement, Function() onDecrement) {
     return Row(
@@ -134,7 +151,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
 
             // Date & Time Fields
             buildInputField(
-              "Start date",
+              _formatDate(_startDate),
               false,
               false,
               () {},
@@ -145,7 +162,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
             ),
             const SizedBox(height: 12),
             buildInputField(
-              "Start time",
+              _formatTime(_startTime),
               false,
               false,
               () {},
@@ -156,7 +173,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
             ),
             const SizedBox(height: 12),
             buildInputField(
-              "End date",
+              _formatDate(_endDate),
               false,
               false,
               () {},
@@ -167,7 +184,7 @@ class _DropBagsUIState extends State<DropBagsUI> {
             ),
             const SizedBox(height: 12),
             buildInputField(
-              "End time",
+              _formatTime(_endTime),
               false,
               false,
               () {},

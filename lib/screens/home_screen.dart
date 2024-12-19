@@ -14,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  final PageController _pageController = PageController();
   late List<Widget> _screens;
 
   @override
@@ -30,51 +29,31 @@ class _HomeScreenState extends State<HomeScreen> {
       // Pick Location Screen UI
       const PickLocation(),
       // Profile Screen UI
-      ProfileUI(),
+      const ProfileUI(),
     ];
   }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     });
   }
 
   void _navigateToYourLuggage() {
     setState(() {
       _selectedIndex = 1;
-      _pageController.animateToPage(
-        1,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     });
   }
 
   void _navigateToDropBags() {
     setState(() {
       _selectedIndex = 2;
-      _pageController.animateToPage(
-        2,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     });
   }
 
   void _navigateToPickLocation() {
     setState(() {
       _selectedIndex = 2;
-      _pageController.animateToPage(
-        2,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     });
   }
 
@@ -83,13 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFE2D4E0), // Background color
       body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
+        child: IndexedStack(
+          index: _selectedIndex,
           children: _screens,
         ),
       ),

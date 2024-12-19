@@ -22,7 +22,6 @@ class _PickLocationState extends State<PickLocation> {
   String _price = "From \$4.99/ 24h";
   String _closingTime = "Closes at 10:30 PM";
   String _placeDetails = "";
-  String _imageUrl = "";
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +108,7 @@ class _PickLocationState extends State<PickLocation> {
               left: 15,
               right: 15,
               child: Container(
-                height: 220,
+                height: 240,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -128,16 +127,12 @@ class _PickLocationState extends State<PickLocation> {
                       children: [
                         // Image Placeholder
                         Container(
-                          width: 80,
-                          height: 80,
+                          width: 100,
+                          height: 100,
                           decoration: BoxDecoration(
+                            color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey.shade300,
                           ),
-                          child: _imageUrl.isEmpty
-                              ? const Icon(Icons.image,
-                                  size: 40, color: Colors.grey)
-                              : Image.network(_imageUrl, fit: BoxFit.cover),
                         ),
                         const SizedBox(width: 8),
                         // Details Section
@@ -158,7 +153,7 @@ class _PickLocationState extends State<PickLocation> {
                               Text(
                                 _placeDetails,
                                 style: GoogleFonts.mulish(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: const Color(0xFF7C7E9D),
                                 ),
                               ),
@@ -166,7 +161,7 @@ class _PickLocationState extends State<PickLocation> {
                               Row(
                                 children: [
                                   const Icon(Icons.star,
-                                      size: 16, color: Colors.yellow),
+                                      size: 14, color: Colors.yellow),
                                   const SizedBox(width: 4),
                                   Text(
                                     _rating,
@@ -201,26 +196,28 @@ class _PickLocationState extends State<PickLocation> {
 
                     // Select Location Button
                     Positioned(
-                      bottom: 10,
+                      bottom: -2,
                       right: 0,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF8D5B8C),
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
+                              horizontal: 8, vertical: 4),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.push(
                             context,
-                            Routes.dropBagsScreen, // Navigate to Drop Bags UI
+                            Routes.generateRoute(
+                              const RouteSettings(name: Routes.dropBagsScreen),
+                            ),
                           );
                         },
                         child: const Text(
                           "Select Location",
-                          style: TextStyle(fontSize: 14, color: Colors.white),
+                          style: TextStyle(fontSize: 12, color: Colors.white),
                         ),
                       ),
                     ),
@@ -259,7 +256,6 @@ class _PickLocationState extends State<PickLocation> {
     try {
       setState(() {
         _locationName = "Dynamic Location";
-        _imageUrl = "https://via.placeholder.com/80";
         _openingStatus = "Open Now";
         _rating = "4.8";
         _price = "From \$5.99/ 24h";
