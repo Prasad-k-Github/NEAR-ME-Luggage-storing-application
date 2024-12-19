@@ -20,6 +20,7 @@ dependencies:
   cloud_firestore: ^5.5.1            # Firestore for backend data storage
   flutter_svg: ^2.0.10                # SVG image support
   provider: ^6.1.0                    # State management
+  geocoding: ^2.0.0
 
 dev_dependencies:
   flutter_test:

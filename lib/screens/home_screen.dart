@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/widgets.dart';
 import 'your_luggage_ui.dart';
-import 'drop_bags_ui.dart';
 import 'profile_ui.dart';
+import 'pick_location.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,8 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
       HomeUI(navigateToYourLuggage: _navigateToYourLuggage),
       // Your Luggage UI
       YourLuggageUI(navigateToDropBags: _navigateToDropBags),
-      // Drop Bags Screen UI
-      DropBagsUI(),
+      // Pick Location Screen UI
+      const PickLocation(),
       // Profile Screen UI
       ProfileUI(),
     ];
@@ -59,17 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = 2;
       _pageController.animateToPage(
         2,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    });
-  }
-
-  void _navigateToProfile() {
-    setState(() {
-      _selectedIndex = 3;
-      _pageController.animateToPage(
-        3,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
