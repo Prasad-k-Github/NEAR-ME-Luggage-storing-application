@@ -69,6 +69,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar:
           buildBottomNavigationBar(_selectedIndex, _onItemTapped),
+      floatingActionButton: _selectedIndex == 0 // Show only on the home screen
+          ? FloatingActionButton(
+              onPressed: () {
+                // Add your camera button action here
+                print("Camera button pressed!");
+              },
+              backgroundColor: const Color(0xFF4C5372),
+              elevation: 8.0,
+              shape: const CircleBorder(),
+              child: const Icon(Icons.camera_alt, color: Color(0xFFFFFFFF)),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -136,13 +149,13 @@ class HomeUI extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 25),
 
           // Horizontal Cards Section
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: SizedBox(
-              height: 160,
+              height: 140,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 8),

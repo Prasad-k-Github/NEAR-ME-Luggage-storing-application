@@ -77,8 +77,9 @@ class YourLuggageUI extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildDetailText("Start Date and time", "$date - $startTime"),
-                  buildDetailText("End Date and time", "$date - $endTime"),
+                  buildDetailText(
+                      "Drop-off Date and time", "$date - $startTime"),
+                  buildDetailText("Pick-up Date and time", "$date - $endTime"),
                   buildDetailText("Location", "USA"),
                 ],
               ),

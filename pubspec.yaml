@@ -52,8 +52,3 @@ flutter:
     - assets/images/Home.jpeg
     - assets/images/boy.png
     - assets/images/logo.png
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/images/logo.png"

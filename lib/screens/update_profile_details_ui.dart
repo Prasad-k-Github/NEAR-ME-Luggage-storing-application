@@ -31,14 +31,31 @@ class UpdateProfileDetailsUI extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Update Image
+              // User Avatar
               Center(
-                child: Image.asset(
-                  'assets/images/update.png', // Ensure this path is correct
-                  height: 300,
-                  width: 600,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+                    border: Border.all(
+                      color: const Color(0xFF4C5372),
+                      width: 4,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 70, // Increased radius
+                    backgroundImage: const AssetImage('assets/images/boy.png'),
+                  ),
                 ),
               ),
+
+              const SizedBox(height: 20),
 
               // Name Input Field
               _buildInputField(hintText: "Name"),
@@ -57,10 +74,10 @@ class UpdateProfileDetailsUI extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3A6A68), // Green color
+                    backgroundColor: const Color(0xFF5A3C62),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   onPressed: () {

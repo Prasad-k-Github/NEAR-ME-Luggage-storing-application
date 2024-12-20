@@ -66,7 +66,7 @@ class ChangePasswordUI extends StatelessWidget {
                     backgroundColor: const Color(0xFF5A3C62), // Button Color
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   onPressed: () {
