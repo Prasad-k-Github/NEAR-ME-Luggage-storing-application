@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../routes.dart';
+import '../widgets/widgets.dart'; // Import the widgets.dart file
 
 class BookingUI extends StatelessWidget {
   const BookingUI({super.key});
@@ -9,6 +10,14 @@ class BookingUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE2D4E0),
+      appBar: buildRoundedAppBar(
+        title: "YOUR BOOKING",
+        height: 90,
+        backgroundColor: const Color(0xFF5A3C62),
+        titleColor: Colors.white,
+        borderRadius: 40,
+        titleFontSize: 28,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -16,20 +25,6 @@ class BookingUI extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 40),
-
-              // Title Section
-              Center(
-                child: Text(
-                  "YOUR BOOKING",
-                  style: GoogleFonts.mulish(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    color: const Color(0xFF5A3C62),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
 
               // Booking Details Card
               Container(
@@ -235,7 +230,7 @@ class BookingUI extends StatelessWidget {
                     backgroundColor: const Color(0xFF5A3C62),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   onPressed: () {

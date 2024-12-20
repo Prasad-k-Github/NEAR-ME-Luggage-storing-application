@@ -204,7 +204,7 @@ class _PickLocationState extends State<PickLocation> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                         ),
                         onPressed: () {

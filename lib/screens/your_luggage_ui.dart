@@ -15,7 +15,7 @@ class YourLuggageUI extends StatelessWidget {
           Text(
             "YOUR LUGGAGE",
             style: GoogleFonts.mulish(
-              fontSize: 28,
+              fontSize: 30,
               fontWeight: FontWeight.w900,
               color: const Color(0xFF4C5372),
             ),
@@ -25,7 +25,7 @@ class YourLuggageUI extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF8D5B8C),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(25),
               ),
             ),
             onPressed: navigateToDropBags,
@@ -93,7 +93,7 @@ class YourLuggageUI extends StatelessWidget {
                 backgroundColor: const Color(0xFF8D5B8C),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
               onPressed: () {

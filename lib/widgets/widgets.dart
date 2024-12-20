@@ -242,3 +242,36 @@ Widget buildProfileButton({
     ),
   );
 }
+
+/// Builds a custom AppBar with rounded corners and a title.
+PreferredSizeWidget buildRoundedAppBar({
+  required String title,
+  double height = 100,
+  Color backgroundColor = const Color(0xFF5A3C62),
+  Color titleColor = Colors.white,
+  double borderRadius = 40,
+  double titleFontSize = 30,
+}) {
+  return PreferredSize(
+    preferredSize: Size.fromHeight(height),
+    child: ClipRRect(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(borderRadius),
+        bottomRight: Radius.circular(borderRadius),
+      ),
+      child: AppBar(
+        backgroundColor: backgroundColor,
+        title: Text(
+          title,
+          style: GoogleFonts.mulish(
+            fontSize: titleFontSize,
+            fontWeight: FontWeight.w900,
+            color: titleColor,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
+    ),
+  );
+}

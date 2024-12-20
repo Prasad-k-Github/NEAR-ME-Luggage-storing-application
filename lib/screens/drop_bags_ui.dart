@@ -88,68 +88,32 @@ class _DropBagsUIState extends State<DropBagsUI> {
     return "${time.hour}:${time.minute.toString().padLeft(2, '0')}";
   }
 
-  // Build a row for displaying bag details and count controls
-  Widget _buildBagRow(String imagePath, String title, String subtitle,
-      int bagCount, Function() onIncrement, Function() onDecrement) {
-    return Row(
-      children: [
-        Image.asset(imagePath, height: 50, width: 50),
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title,
-                style: GoogleFonts.mulish(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: const Color(0xFF4C5372))),
-            Text(subtitle, style: const TextStyle(color: Colors.grey)),
-          ],
-        ),
-        const Spacer(),
-        IconButton(
-          icon: const Icon(Icons.remove_circle_outline,
-              size: 35), // Increased size
-          onPressed: onDecrement,
-          color: const Color(0xFF4C5372),
-        ),
-        Text(
-          "$bagCount",
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        IconButton(
-          icon:
-              const Icon(Icons.add_circle_outline, size: 35), // Increased size
-          onPressed: onIncrement,
-          color: const Color(0xFF4C5372),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE2D4E0), // Set background color
+      backgroundColor: const Color(0xFFE2D4E0),
+      appBar: buildRoundedAppBar(
+        title: "Drop Your Bags",
+        height: 80,
+        borderRadius: 40,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 55),
-            Center(
-              child: Text(
-                "DROP YOUR BAGS",
-                style: GoogleFonts.mulish(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
-                  color: const Color(0xFF4C5372),
-                ),
+            const SizedBox(height: 8),
+
+            // Drop-off Date & Time Section
+            Text(
+              "Drop-off Date & Time",
+              style: GoogleFonts.mulish(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF4C5372),
               ),
             ),
-            const SizedBox(height: 30),
-
-            // Date & Time Fields
+            const SizedBox(height: 12),
             buildInputField(
               _formatDate(_startDate),
               false,
@@ -170,6 +134,18 @@ class _DropBagsUIState extends State<DropBagsUI> {
               suffixIcon: const Icon(Icons.access_time, color: Colors.grey),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Pick-up Date & Time Section
+            Text(
+              "Pick-up Date & Time",
+              style: GoogleFonts.mulish(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF4C5372),
+              ),
             ),
             const SizedBox(height: 12),
             buildInputField(
@@ -206,9 +182,9 @@ class _DropBagsUIState extends State<DropBagsUI> {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
-            // Bag Rows
+            // Bag Details Section
             _buildBagRow("assets/images/small_bag.png", "Small Bag",
                 "Purses, tote bags", smallBagCount, () {
               _incrementBagCount("small");
@@ -216,20 +192,20 @@ class _DropBagsUIState extends State<DropBagsUI> {
               _decrementBagCount("small");
             }),
             const SizedBox(height: 20),
-            _buildBagRow("assets/images/regular_bag.png", "Regular",
+            _buildBagRow("assets/images/regular_bag.png", "Regular Bag",
                 "Suitcases, backpacks", regularBagCount, () {
               _incrementBagCount("regular");
             }, () {
               _decrementBagCount("regular");
             }),
             const SizedBox(height: 20),
-            _buildBagRow("assets/images/odd_sized_bag.png", "Odd-sized",
+            _buildBagRow("assets/images/odd_sized_bag.png", "Odd-sized Bag",
                 "Surfboards, golf bags", oddSizedBagCount, () {
               _incrementBagCount("odd");
             }, () {
               _decrementBagCount("odd");
             }),
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
 
             // Place Order Button
             Center(
@@ -240,10 +216,8 @@ class _DropBagsUIState extends State<DropBagsUI> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF5A3C62),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 60, vertical: 15),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.bookingScreen);
@@ -262,6 +236,48 @@ class _DropBagsUIState extends State<DropBagsUI> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildBagRow(String imagePath, String title, String subtitle,
+      int bagCount, VoidCallback onIncrement, VoidCallback onDecrement) {
+    return Row(
+      children: [
+        Image.asset(imagePath, height: 50, width: 50),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.mulish(
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+                color: const Color(0xFF4C5372),
+              ),
+            ),
+            Text(
+              subtitle,
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
+        const Spacer(),
+        IconButton(
+          icon: const Icon(Icons.remove_circle_outline, size: 35),
+          onPressed: onDecrement,
+          color: const Color(0xFF4C5372),
+        ),
+        Text(
+          "$bagCount",
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        IconButton(
+          icon: const Icon(Icons.add_circle_outline, size: 35),
+          onPressed: onIncrement,
+          color: const Color(0xFF4C5372),
+        ),
+      ],
     );
   }
 }

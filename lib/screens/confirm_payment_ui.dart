@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../routes.dart';
+import '../widgets/widgets.dart'; // Import the widgets.dart file
 
 class ConfirmPaymentUI extends StatefulWidget {
   const ConfirmPaymentUI({super.key});
@@ -16,22 +17,19 @@ class _ConfirmPaymentUIState extends State<ConfirmPaymentUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE2D4E0),
+      appBar: buildRoundedAppBar(
+        title: "CONFIRM PAYMENT",
+        height: 90,
+        backgroundColor: const Color(0xFF5A3C62),
+        titleColor: Colors.white,
+        borderRadius: 40,
+        titleFontSize: 24,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 55),
-            Center(
-              child: Text(
-                "YOUR BOOKING",
-                style: GoogleFonts.mulish(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                  color: const Color(0xFF5A3C62),
-                ),
-              ),
-            ),
             const SizedBox(height: 30),
 
             // Booking Summary
@@ -191,7 +189,7 @@ class _ConfirmPaymentUIState extends State<ConfirmPaymentUI> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF5A3C62),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
                 onPressed: () {
