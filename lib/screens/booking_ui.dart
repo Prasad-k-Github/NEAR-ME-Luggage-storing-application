@@ -30,7 +30,7 @@ class BookingUI extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFD9D6DB),
+                  color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
@@ -144,7 +144,7 @@ class BookingUI extends StatelessWidget {
                       borderSide: BorderSide.none,
                     ),
                     filled: true,
-                    fillColor: const Color(0xFFD9D6DB),
+                    fillColor: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ),

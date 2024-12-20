@@ -36,7 +36,7 @@ class _ConfirmPaymentUIState extends State<ConfirmPaymentUI> {
             Container(
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: const Color(0xFFD9D6DB),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(

@@ -4,6 +4,8 @@ import '../widgets/widgets.dart';
 import 'your_luggage_ui.dart';
 import 'profile_ui.dart';
 import 'pick_location.dart';
+import 'camera_screen.dart'; // Import the CameraScreen
+import 'package:camera/camera.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,8 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
     _screens = [
       // Home Screen UI
       HomeUI(
-          navigateToYourLuggage: _navigateToYourLuggage,
-          navigateToPickLocation: _navigateToPickLocation),
+        navigateToYourLuggage: _navigateToYourLuggage,
+        navigateToPickLocation: _navigateToPickLocation,
+      ),
       // Your Luggage UI
       YourLuggageUI(navigateToDropBags: _navigateToDropBags),
       // Pick Location Screen UI
@@ -57,6 +60,25 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> _openCamera() async {
+    try {
+      final cameras = await availableCameras();
+      final imagePath = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraScreen(camera: cameras.first),
+        ),
+      );
+
+      if (imagePath != null) {
+        debugPrint('Image captured at: $imagePath');
+        // Handle the captured image path if needed
+      }
+    } catch (e) {
+      debugPrint('Error opening camera: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,10 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           buildBottomNavigationBar(_selectedIndex, _onItemTapped),
       floatingActionButton: _selectedIndex == 0 // Show only on the home screen
           ? FloatingActionButton(
-              onPressed: () {
-                // Add your camera button action here
-                print("Camera button pressed!");
-              },
+              onPressed: _openCamera, // Call the function to open the camera
               backgroundColor: const Color(0xFF4C5372),
               elevation: 8.0,
               shape: const CircleBorder(),
@@ -91,10 +110,11 @@ class HomeUI extends StatelessWidget {
   final VoidCallback navigateToYourLuggage;
   final VoidCallback navigateToPickLocation;
 
-  const HomeUI(
-      {super.key,
-      required this.navigateToYourLuggage,
-      required this.navigateToPickLocation});
+  const HomeUI({
+    super.key,
+    required this.navigateToYourLuggage,
+    required this.navigateToPickLocation,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +144,8 @@ class HomeUI extends StatelessWidget {
           // Large Image Section
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 16.0), // Add left and right padding
+              horizontal: 16.0,
+            ), // Add left and right padding
             child: Container(
               height: 180,
               width: double.infinity,
@@ -192,7 +213,8 @@ class HomeUI extends StatelessWidget {
           // Luggage Storage Section
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 16.0), // Add left and right padding
+              horizontal: 16.0,
+            ), // Add left and right padding
             child: Container(
               height: 160,
               width: double.infinity,
@@ -224,7 +246,9 @@ class HomeUI extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF8D5B8C),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 12),
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),

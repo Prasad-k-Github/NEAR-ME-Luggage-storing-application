@@ -162,7 +162,7 @@ class _ProfileUIState extends State<ProfileUI> {
           const SizedBox(height: 80),
           Center(
             child: Text(
-              "USER",
+              "KENULA",
               style: GoogleFonts.mulish(
                 fontSize: 50,
                 fontWeight: FontWeight.w900,
@@ -203,7 +203,7 @@ class _ProfileUIState extends State<ProfileUI> {
             child: Column(
               children: [
                 Text(
-                  "user@gmail.com",
+                  "kenula@gmail.com",
                   style: GoogleFonts.mulish(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
