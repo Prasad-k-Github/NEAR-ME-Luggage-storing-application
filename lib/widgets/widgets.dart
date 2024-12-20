@@ -144,7 +144,8 @@ Widget buildNavBarItem({required bool isActive, required IconData icon}) {
 }
 
 /// Builds a custom bottom navigation bar with the provided selected index and onTap callback.
-Widget buildBottomNavigationBar(int selectedIndex, Function(int) onTap) {
+Widget buildBottomNavigationBar(
+    int selectedIndex, Function(int) onTap, VoidCallback onCameraTap) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
     height: 65,
@@ -171,6 +172,22 @@ Widget buildBottomNavigationBar(int selectedIndex, Function(int) onTap) {
           icon: Icons.description,
           isActive: selectedIndex == 1,
           onTap: () => onTap(1),
+        ),
+        // Camera Button
+        GestureDetector(
+          onTap: onCameraTap,
+          child: Container(
+            padding: const EdgeInsets.all(10.0),
+            decoration: const BoxDecoration(
+              color: Color(0xFF4C5372), // Camera button background color
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.camera_alt,
+              size: 30,
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
+          ),
         ),
         _buildNavBarItem(
           icon: Icons.location_on,

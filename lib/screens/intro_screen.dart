@@ -26,7 +26,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
   void _onNextPressed() {
     if (_currentIndex == 2) {
-      Navigator.pushReplacementNamed(context, Routes.signInScreen);
+      Navigator.pushReplacementNamed(context, Routes.homeScreen);
     } else {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -36,7 +36,7 @@ class _IntroScreenState extends State<IntroScreen> {
   }
 
   void _onSkipPressed() {
-    Navigator.pushReplacementNamed(context, Routes.signInScreen);
+    Navigator.pushReplacementNamed(context, Routes.homeScreen);
   }
 
   @override

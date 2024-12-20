@@ -4,7 +4,9 @@ import 'update_profile_details_ui.dart';
 import 'change_password_ui.dart';
 
 class ProfileUI extends StatefulWidget {
-  const ProfileUI({super.key});
+  final VoidCallback navigateToYourLuggage;
+
+  const ProfileUI({super.key, required this.navigateToYourLuggage});
 
   @override
   State<ProfileUI> createState() => _ProfileUIState();
@@ -216,6 +218,28 @@ class _ProfileUIState extends State<ProfileUI> {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xFF7C7E9D),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF8D5B8C),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: widget.navigateToYourLuggage,
+                  child: const Text(
+                    "View your luggages",
+                    style: TextStyle(
+                      fontFamily: 'Arial',
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],

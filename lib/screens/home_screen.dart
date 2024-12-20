@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Pick Location Screen UI
       const PickLocation(),
       // Profile Screen UI
-      const ProfileUI(),
+      ProfileUI(navigateToYourLuggage: _navigateToYourLuggage),
     ];
   }
 
@@ -90,17 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar:
-          buildBottomNavigationBar(_selectedIndex, _onItemTapped),
-      floatingActionButton: _selectedIndex == 0 // Show only on the home screen
-          ? FloatingActionButton(
-              onPressed: _openCamera, // Call the function to open the camera
-              backgroundColor: const Color(0xFF4C5372),
-              elevation: 8.0,
-              shape: const CircleBorder(),
-              child: const Icon(Icons.camera_alt, color: Color(0xFFFFFFFF)),
-            )
-          : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          buildBottomNavigationBar(_selectedIndex, _onItemTapped, _openCamera),
     );
   }
 }

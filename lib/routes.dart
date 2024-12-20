@@ -13,7 +13,7 @@ import 'screens/booking_ui.dart';
 import 'screens/confirm_payment_ui.dart';
 
 class Routes {
-  static const String loadingScreen = '/';
+  static const String loadingScreen = '/loading';
   static const String introScreen = '/intro';
   static const String signInScreen = '/sign-in';
   static const String homeScreen = '/home';
@@ -32,7 +32,11 @@ class Routes {
       introScreen: (context) => const IntroScreen(),
       signInScreen: (context) => const SignInScreen(),
       homeScreen: (context) => const HomeScreen(),
-      profileScreen: (context) => const ProfileUI(),
+      profileScreen: (context) => ProfileUI(
+            navigateToYourLuggage: () {
+              Navigator.pushNamed(context, dropBagsScreen);
+            },
+          ),
       updateProfileScreen: (context) => const UpdateProfileUI(),
       updateProfileDetailsScreen: (context) => const UpdateProfileDetailsUI(),
       changePasswordScreen: (context) => const ChangePasswordUI(),
@@ -68,12 +72,14 @@ class Routes {
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var offsetAnimation = animation.drive(tween);
+        final tween = Tween(begin: begin, end: end);
+        final curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
 
         return SlideTransition(
-          position: offsetAnimation,
+          position: tween.animate(curvedAnimation),
           child: child,
         );
       },
