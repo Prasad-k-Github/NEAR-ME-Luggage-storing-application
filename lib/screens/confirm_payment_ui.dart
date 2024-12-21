@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../routes.dart';
-import '../widgets/widgets.dart'; // Import the widgets.dart file
+import '../widgets/widgets.dart';
 
 class ConfirmPaymentUI extends StatefulWidget {
   const ConfirmPaymentUI({super.key});
@@ -193,7 +193,7 @@ class _ConfirmPaymentUIState extends State<ConfirmPaymentUI> {
                   ),
                 ),
                 onPressed: () {
-                  // Navigate to payment processing or confirmation screen
+                  Navigator.pushReplacementNamed(context, Routes.signInScreen);
                 },
                 child: Text(
                   "Continue To Payment",

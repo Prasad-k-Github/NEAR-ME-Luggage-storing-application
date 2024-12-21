@@ -32,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
     if (_pageController.page == 1) {
       _toggleSignUp();
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.introScreen);
+      Navigator.of(context).pushReplacementNamed(Routes.confirmPaymentScreen);
     }
   }
 
@@ -87,7 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 opacity: 1.0,
                 duration: const Duration(milliseconds: 500),
                 child: Text(
-                  "WELCOME",
+                  "SIGN IN",
                   style: GoogleFonts.mulish(
                     textStyle: const TextStyle(
                       fontSize: 40,
@@ -254,7 +254,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 opacity: 1.0,
                 duration: const Duration(milliseconds: 500),
                 child: Text(
-                  "WELCOME",
+                  "SIGN UP",
                   style: GoogleFonts.mulish(
                     textStyle: const TextStyle(
                       fontSize: 40,
